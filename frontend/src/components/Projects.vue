@@ -4,7 +4,9 @@
       <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-dark">
         Mes <span class="text-gradient">Projets</span>
       </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div v-if="loading" class="text-center text-gray-600">Chargement...</div>
+      <div v-else-if="error" class="text-center text-red-600">{{ error }}</div>
+      <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div v-for="(project, index) in projects" 
              :key="index"
              class="group bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover-lift overflow-hidden">
@@ -38,32 +40,26 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   data() {
     return {
-      projects: [
-        {
-          title: "Application E-commerce",
-          description: "Une plateforme e-commerce moderne avec un design intuitif et des fonctionnalités avancées.",
-          image: "https://via.placeholder.com/600x400",
-          tags: ["Vue.js", "Tailwind", "API"],
-          link: "#",
-        },
-        {
-          title: "Portfolio Personnel",
-          description: "Un portfolio responsive pour présenter mes compétences et projets.",
-          image: "https://via.placeholder.com/600x400",
-          tags: ["HTML", "CSS", "JavaScript"],
-          link: "#",
-        },
-        {
-          title: "Tableau de Bord Analytics",
-          description: "Un tableau de bord pour visualiser les données en temps réel.",
-          image: "https://via.placeholder.com/600x400",
-          tags: ["React", "Chart.js", "API"],
-          link: "#",
-        },
-      ],
+      projects: [],
+      loading: false,
+      error: null,
+    }
+  },
+  async created() {
+    this.loading = true
+    try {
+      const response = await axios.get('http://localhost:8000/api/projects/')
+      this.projects = response.data
+    } catch (err) {
+      this.error = 'Erreur lors du chargement des projets. Veuillez réessayer.'
+      console.error(err)
+    } finally {
+      this.loading = false
     }
   },
 }
