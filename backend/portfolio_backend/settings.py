@@ -35,11 +35,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',  # Added for Django REST Framework
-    'portfolio',  # Added for our portfolio app
+    'rest_framework',  # Déjà présent
+    'portfolio',  # Déjà présent
+    'corsheaders',  # Ajouté ici (avec une virgule à la fin si nécessaire)
 ]
 
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # Ajouté EN PREMIER
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -48,6 +51,15 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
+
+# Configuration CORS
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+]
+
 
 ROOT_URLCONF = 'portfolio_backend.urls'
 

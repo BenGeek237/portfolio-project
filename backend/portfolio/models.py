@@ -3,9 +3,9 @@ from django.db import models
 class Project(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
-    image = models.URLField(max_length=500)  # URL for the image
-    tags = models.JSONField()  # Store tags as a JSON list
-    link = models.URLField(max_length=500)
+    image = models.URLField(blank=True)
+    tags = models.JSONField(default=list)
+    link = models.URLField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -13,22 +13,31 @@ class Project(models.Model):
 
 class Skill(models.Model):
     name = models.CharField(max_length=100)
+    icon = models.CharField(max_length=50, blank=True)
 
     def __str__(self):
         return self.name
 
 class ContactDetail(models.Model):
-    type = models.CharField(max_length=100)
+    type = models.CharField(max_length=50)
     value = models.CharField(max_length=200)
-    icon = models.CharField(max_length=100)  # FontAwesome icon class
+    icon = models.CharField(max_length=50, blank=True)
 
     def __str__(self):
         return self.type
 
 class SocialLink(models.Model):
-    name = models.CharField(max_length=100)
-    link = models.URLField(max_length=500)
-    icon = models.CharField(max_length=100)  # FontAwesome icon class
+    link = models.URLField()
+    icon = models.CharField(max_length=50, blank=True)
 
     def __str__(self):
-        return self.name
+        return self.link
+
+class Message(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.email}"
