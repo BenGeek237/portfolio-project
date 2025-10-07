@@ -6,9 +6,9 @@
         <!-- Logo -->
         <a href="#" class="flex items-center space-x-2 group">
           <div class="w-10 h-10 rounded-xl bg-gradient-to-r from-primary to-secondary flex items-center justify-center shadow-lg">
-            <span class="text-white font-bold text-lg">P</span>
+            <span class="text-white font-bold text-lg">M</span>
           </div>
-          <span class="text-2xl font-bold text-dark group-hover:text-primary transition-colors duration-300">Portfolio</span>
+          <span class="text-2xl font-bold text-dark group-hover:text-primary transition-colors duration-300">Mamoudou</span>
         </a>
 
         <!-- Menu Desktop -->
