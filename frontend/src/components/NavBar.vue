@@ -19,17 +19,15 @@
              class="relative px-3 sm:px-5 py-2 sm:py-3 font-medium rounded-xl transition-all duration-300 group"
              :class="activeSection === item.id ? 
                     'text-white bg-gradient-to-r from-primary to-secondary shadow-md' : 
-                    'text-gray-800 hover:text-white hover:bg-gradient-to-r hover:from-primary hover:to-secondary'"
+                    activeSection === 'contact' && item.id === 'contact' ? 
+                    'text-white bg-gradient-to-r from-primary to-secondary shadow-md border-none' : 
+                    'text-gray-800 hover:text-white hover:bg-gradient-to-r hover:from-primary hover:to-secondary border border-transparent hover:border-none'"
              @click="setActiveSection(item.id)">
             <span class="relative z-10">{{ item.name }}</span>
             <div v-if="activeSection === item.id" 
                  class="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-xl animate-pulse"></div>
             <div v-if="activeSection === item.id" 
                  class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-white rounded-full"></div>
-          </a>
-          <a href="#contact" 
-             class="ml-4 px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover-lift">
-            Contact
           </a>
         </div>
 
@@ -56,12 +54,6 @@
             <span>{{ item.name }}</span>
             <div v-if="activeSection === item.id" 
                  class="ml-auto w-2 h-2 bg-white rounded-full"></div>
-          </a>
-          <div class="border-t border-gray-200 my-2"></div>
-          <a href="#contact" 
-             class="px-4 py-3 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-xl text-center shadow-lg mt-2"
-             @click="mobileMenuOpen = false">
-            Me Contacter
           </a>
         </div>
       </div>
