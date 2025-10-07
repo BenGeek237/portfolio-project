@@ -16,16 +16,16 @@
           <a v-for="(item, index) in navItems" 
              :key="index"
              :href="item.link" 
-             class="relative px-3 sm:px-5 py-2 sm:py-3 font-medium text-gray-700 rounded-xl transition-all duration-300 group"
+             class="relative px-3 sm:px-5 py-2 sm:py-3 font-medium rounded-xl transition-all duration-300 group"
              :class="activeSection === item.id ? 
-                    'text-primary bg-primary/10 shadow-md' : 
-                    'hover:text-primary hover:bg-light'"
+                    'text-white bg-gradient-to-r from-primary to-secondary shadow-md' : 
+                    'text-gray-800 hover:text-white hover:bg-gradient-to-r hover:from-primary hover:to-secondary'"
              @click="setActiveSection(item.id)">
             <span class="relative z-10">{{ item.name }}</span>
             <div v-if="activeSection === item.id" 
-                 class="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-xl animate-pulse"></div>
+                 class="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-xl animate-pulse"></div>
             <div v-if="activeSection === item.id" 
-                 class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-primary rounded-full"></div>
+                 class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-white rounded-full"></div>
           </a>
           <a href="#contact" 
              class="ml-4 px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover-lift">
@@ -35,7 +35,7 @@
 
         <!-- Menu Mobile Button -->
         <button @click="toggleMobileMenu" 
-                class="lg:hidden w-10 sm:w-12 h-10 sm:h-12 rounded-xl bg-light flex items-center justify-center text-gray-700 hover:bg-primary hover:text-white transition-all duration-300 shadow-sm">
+                class="lg:hidden w-10 sm:w-12 h-10 sm:h-12 rounded-xl bg-light flex items-center justify-center text-gray-800 hover:bg-primary hover:text-white transition-all duration-300 shadow-sm">
           <i class="fas fa-bars text-lg sm:text-xl"></i>
         </button>
       </div>
@@ -49,13 +49,13 @@
              :href="item.link" 
              class="px-4 py-3 rounded-xl font-medium transition-all duration-300 flex items-center"
              :class="activeSection === item.id ? 
-                    'text-primary bg-primary/10' : 
-                    'text-gray-700 hover:text-primary hover:bg-light'"
+                    'text-white bg-gradient-to-r from-primary to-secondary' : 
+                    'text-gray-800 hover:text-white hover:bg-gradient-to-r hover:from-primary hover:to-secondary'"
              @click="setActiveSection(item.id); mobileMenuOpen = false">
             <i :class="item.icon" class="w-6 mr-3 text-center"></i>
             <span>{{ item.name }}</span>
             <div v-if="activeSection === item.id" 
-                 class="ml-auto w-2 h-2 bg-primary rounded-full"></div>
+                 class="ml-auto w-2 h-2 bg-white rounded-full"></div>
           </a>
           <div class="border-t border-gray-200 my-2"></div>
           <a href="#contact" 

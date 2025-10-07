@@ -2,15 +2,18 @@
   <div class="font-sans bg-light text-gray-800 overflow-x-hidden">
     <NavBar />
     <main>
-      <section id="accueil" class="min-h-screen flex items-center pt-20 relative">
-        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
-          <div class="md:w-1/2">
-            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight animate-slide-in">
+      <section id="accueil" class="min-h-screen flex items-center pt-20 relative overflow-hidden bg-gradient-to-br from-primary/10 via-secondary/10 to-light">
+        <div class="bubbles-container">
+          <div v-for="n in 10" :key="n" class="bubble" :style="bubbleStyles(n)"></div>
+        </div>
+        <div class="container mx-auto px-6 relative z-10">
+          <div class="max-w-lg md:max-w-xl">
+            <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 leading-tight animate-slide-in">
               <span class="text-gradient">Créateur</span><br>
               d'expériences<br>
               digitales mémorables
             </h1>
-            <p class="text-xl text-gray-600 mb-8 leading-relaxed animate-fade-in">
+            <p class="text-lg sm:text-xl text-gray-600 mb-8 leading-relaxed animate-fade-in">
               Bienvenue sur mon portfolio ! Je suis Mamoudou, passionné par le design et le développement web.
             </p>
             <a href="#contact" 
@@ -18,18 +21,6 @@
               Me Contacter
               <i class="fas fa-arrow-right ml-2"></i>
             </a>
-          </div>
-          <div class="md:w-1/2 relative">
-            <div class="cube-container">
-              <div class="cube">
-                <div class="cube-face front"></div>
-                <div class="cube-face back"></div>
-                <div class="cube-face right"></div>
-                <div class="cube-face left"></div>
-                <div class="cube-face top"></div>
-                <div class="cube-face bottom"></div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -56,43 +47,68 @@ export default {
     Contact,
     Footer,
   },
+  methods: {
+    bubbleStyles(index) {
+      const sizes = [30, 50, 80, 40, 60, 25, 70, 45, 90, 35]
+      const delays = [0, 1, 2, 0.5, 1.5, 3, 2.5, 1.2, 2.8, 0.8]
+      const positions = [
+        { top: '10%', left: '15%' },
+        { top: '20%', left: '70%' },
+        { top: '35%', left: '30%' },
+        { top: '60%', left: '85%' },
+        { top: '25%', left: '50%' },
+        { top: '70%', left: '20%' },
+        { top: '45%', left: '75%' },
+        { top: '80%', left: '40%' },
+        { top: '15%', left: '90%' },
+        { top: '50%', left: '10%' },
+      ]
+      return {
+        width: `${sizes[index - 1]}px`,
+        height: `${sizes[index - 1]}px`,
+        top: positions[index - 1].top,
+        left: positions[index - 1].left,
+        animationDelay: `${delays[index - 1]}s`,
+      }
+    },
+  },
 }
 </script>
 
 <style scoped>
-.cube-container {
-  perspective: 1000px;
-  width: 300px;
-  height: 300px;
-  margin: 0 auto;
-}
-
-.cube {
-  position: relative;
+.bubbles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  transform-style: preserve-3d;
-  animation: rotate 20s infinite linear;
+  z-index: 0;
+  overflow: hidden;
 }
 
-.cube-face {
+.bubble {
   position: absolute;
-  width: 300px;
-  height: 300px;
-  background: linear-gradient(45deg, rgba(108, 99, 255, 0.7), rgba(74, 68, 198, 0.7));
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  opacity: 0.8;
+  background: linear-gradient(45deg, rgba(108, 99, 255, 0.5), rgba(74, 68, 198, 0.5));
+  border-radius: 50%;
+  opacity: 0.5;
+  animation: float 8s ease-in-out infinite;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.front  { transform: translateZ(150px); }
-.back   { transform: translateZ(-150px) rotateY(180deg); }
-.right  { transform: translateX(150px) rotateY(90deg); }
-.left   { transform: translateX(-150px) rotateY(-90deg); }
-.top    { transform: translateY(-150px) rotateX(90deg); }
-.bottom { transform: translateY(150px) rotateX(-90deg); }
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-30px); }
+}
 
-@keyframes rotate {
-  0% { transform: rotateX(0deg) rotateY(0deg); }
-  100% { transform: rotateX(360deg) rotateY(360deg); }
+@media (max-width: 768px) {
+  .bubbles-container {
+    transform: scale(0.8);
+  }
+  .bubble {
+    transform: scale(0.7);
+  }
+  .max-w-lg {
+    max-width: 100%;
+  }
 }
 </style>
