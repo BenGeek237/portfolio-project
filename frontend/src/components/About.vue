@@ -46,7 +46,7 @@ export default {
   async created() {
     this.loading = true
     try {
-      const response = await axios.get('http://localhost:8000/api/skills/')
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/skills/`)
       this.skills = response.data
     } catch (err) {
       this.error = `Erreur lors du chargement des compétences : ${err.message}`

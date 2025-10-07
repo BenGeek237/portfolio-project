@@ -33,7 +33,7 @@ export default {
   async created() {
     this.loading = true
     try {
-      const response = await axios.get('http://localhost:8000/api/social-links/')
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/social-links/`)
       this.socialLinks = response.data
     } catch (err) {
       this.error = `Erreur lors du chargement des liens sociaux : ${err.message}`

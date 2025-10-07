@@ -68,7 +68,7 @@ export default {
   async created() {
     this.loading = true
     try {
-      const response = await axios.get('http://localhost:8000/api/contact-details/')
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/contact-details/`)
       this.contacts = response.data
     } catch (err) {
       this.error = `Erreur lors du chargement des contacts : ${err.message}`
@@ -83,7 +83,7 @@ export default {
       this.formSuccess = false
       this.formError = null
       try {
-        await axios.post('http://localhost:8000/api/messages/', this.form)
+        await axios.post(`${import.meta.env.VITE_API_URL}/api/messages/`, this.form)
         this.formSuccess = true
         this.form = { name: '', email: '', message: '' }
       } catch (err) {

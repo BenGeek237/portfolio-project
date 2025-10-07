@@ -6,6 +6,7 @@
       </h2>
       <div v-if="loading" class="text-center text-gray-600">Chargement...</div>
       <div v-else-if="error" class="text-center text-red-600">{{ error }}</div>
+      <div v-else-if="projects.length === 0" class="text-center text-gray-600">Aucun projet disponible.</div>
       <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div v-for="(project, index) in projects" 
              :key="index"
@@ -53,11 +54,11 @@ export default {
   async created() {
     this.loading = true
     try {
-      const response = await axios.get('http://localhost:8000/api/projects/')
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/projects/`)
       this.projects = response.data
     } catch (err) {
-      this.error = 'Erreur lors du chargement des projets. Veuillez réessayer.'
-      console.error(err)
+      this.error = `Erreur lors du chargement des projets : ${err.message}. Vérifiez que le serveur Django est en cours d'exécution.`
+      console.error('Erreur API :', err)
     } finally {
       this.loading = false
     }
